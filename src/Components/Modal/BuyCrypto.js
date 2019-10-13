@@ -48,12 +48,21 @@ const BuyCryptoModal = ({ onClose, onBuy, show, cryptoModalData }) => {
     };
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
+    if (show) {
+        let { quote: { USD: { price } } } = cryptoModalData[0]
+        var cryptoPrice = price * 75
+    }
+
 
     const handleBuyClick = () => {
         let coins = values.coins
-        let total = values.coins * cryptoModalData[1]
-        onBuy(cryptoModalData[0], coins, total)
-        console.log("vale:", values.coins, total)
+        let total = values.coins * cryptoPrice
+        onBuy({
+            "name": cryptoModalData[0].name,
+            "no_coins": coins,
+            "total_price": total
+        })
+        // console.log("bought data:", [cryptoModalData[0].name, coins, total])
     }
     return (
         <div className={showHideClassName}>
@@ -65,13 +74,13 @@ const BuyCryptoModal = ({ onClose, onBuy, show, cryptoModalData }) => {
                                 Simple Buy
                             </Typography>
                             <Typography variant="h5" color="inherit" style={style.totalprice}>
-                                Total = {(values.coins * cryptoModalData[1]).toFixed(2)}
+                                Total = {(values.coins * cryptoPrice).toFixed(2)}
                             </Typography>
                         </Toolbar>
                     </AppBar>
                 </div>
                 <Typography variant="h5" color="inherit" style={style.heading}>
-                    {cryptoModalData[0]}
+                    {cryptoModalData.name}
                 </Typography>
                 <div style={{ marginLeft: "14px" }} >
                     <TextField
@@ -91,7 +100,7 @@ const BuyCryptoModal = ({ onClose, onBuy, show, cryptoModalData }) => {
                         disabled
                         id="standard-number"
                         label="Price(INR)"
-                        value={cryptoModalData[1]}
+                        value={cryptoPrice}
                         style={style.textField}
                         InputLabelProps={{
                             shrink: true,

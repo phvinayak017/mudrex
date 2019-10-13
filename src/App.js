@@ -10,9 +10,9 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cryptodata: [],
-      cryptoModalData: [],
-      cryptoBuyData: [],
+      cryptoData: [],
+      modalData: [],
+      cryptoBoughtData: [],
       modalShow: false
     }
   }
@@ -32,19 +32,25 @@ export default class App extends Component {
       .get(API_URL, config)
       .then(({ data: { data } }) => {
         this.setState({
-          cryptodata: data
+          cryptoData: data
         })
       }).catch(error => {
         console.log(error)
       })
   }
 
-  CryptoModalInfo = (cryptoModalData) => {
+  CryptoModalInfo = (id) => {
+    // get the cryptoModaldata from cryptodata using Id
+    const modalData = this.state.cryptoData.filter((data) => {
+      return data.id === id
+    })
+    console.log("modal data", [...modalData], this.state.cryptoModalData)
+
     this.setState({
       modalShow: true,
-      cryptoModalData
+      modalData
     })
-    console.log("app.js", cryptoModalData)
+    // console.log("app.js", modalData)
   }
 
   CloseModal = () => {
@@ -53,28 +59,32 @@ export default class App extends Component {
     })
   }
 
-  handleBuy = (cryptoBoughtData) => {
-    console.log(cryptoBoughtData)
-    this.setState({
-      modalShow: false
+  handleBuy = (BoughtData) => {
+    console.log("BoughtData", BoughtData)
+    this.setState((state) => {
+      return {
+        modalShow: false,
+        cryptoBoughtData: (BoughtData)
+      }
     })
   }
 
   render() {
-    const { cryptodata, cryptoModalData, modalShow } = this.state
+    const { cryptoData, modalData, modalShow, cryptoBoughtData } = this.state
+    console.log("App.js, cryptoBoughtData:", cryptoBoughtData)
     return (
       <div >
         <Header />
         <BuyCryptoModal
-          cryptoModalData={cryptoModalData}
+          cryptoModalData={modalData}
           show={modalShow}
           onClose={this.CloseModal}
           onBuy={this.handleBuy}
         />
         <Main
-          cryptodata={cryptodata}
+          cryptodata={cryptoData}
           handleCryptoBuy={this.CryptoModalInfo}
-        // cryptoModalData={cryptoModalData}
+          cryptoBoughtData={cryptoBoughtData}
         // show={modalShow}
         />
         <Footer />

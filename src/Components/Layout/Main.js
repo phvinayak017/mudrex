@@ -7,19 +7,27 @@ import { Button } from '@material-ui/core';
 import Header from './Header'
 
 export default function Main(props) {
-    const { cryptodata, handleCryptoBuy } = props
+    const { cryptodata, handleCryptoBuy, cryptoBoughtData } = props
 
-    function handleClick(cryptoInfo) {
-        handleCryptoBuy(cryptoInfo)
+    const handleClick = (id) => {
+        console.log("handleclick:", id)
+        handleCryptoBuy(id)
     }
+
+    const handlePortfolioClick = () => {
+
+    }
+
     return (
         <div >
             <Grid container >
                 <Grid item xs={12} >
                     <Paper style={{ height: "15vh" }}>
                         <Button
+                            variant="contained"
                             color='secondary'
-                            style={{ marginLeft: "185vh", marginTop: "6vh" }}>
+                            style={{ marginLeft: "185vh", marginTop: "6vh" }}
+                            onClick={handlePortfolioClick}>
                             Portfolio
                             </Button>
                     </Paper>

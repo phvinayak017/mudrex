@@ -27,17 +27,17 @@ const style = {
 
 export default class CryptoList extends Component {
 
-    handleClick = (content) => {
+    handleClick = (id) => {
         return () => {
-            this.props.onCryptoCurrencyClick(content)
-            // console.log(`You clicked on row with id ${content[0]} , ${content[1]}.`);
+            this.props.onCryptoCurrencyClick(id)
+            console.log(`You clicked on row with id ${id}.`);
 
         }
     }
 
     render() {
         const { tablecontent } = this.props
-        console.log("tablecontent:", tablecontent)
+        // console.log("tablecontent:", tablecontent)
         return (
             <div>
                 <Table stickyHeader>
@@ -69,7 +69,7 @@ export default class CryptoList extends Component {
                                     <TableCell
                                         align="left"
                                         style={style.cryptoname}
-                                        onClick={this.handleClick([content.name, price])}
+                                        onClick={this.handleClick(content.id)}
                                     >
                                         {content.name}
                                     </TableCell>
