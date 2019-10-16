@@ -1,13 +1,13 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CryptoList from "../Table/CryptoList";
 import { Button } from '@material-ui/core';
-import Header from './Header'
+import { withRouter } from 'react-router-dom';
 
-export default function Main(props) {
-    const { cryptodata, handleCryptoBuy, cryptoBoughtData } = props
+
+const Main = (props) => {
+    const { cryptodata, handleCryptoBuy, investmentByCurrency } = props
 
     const handleClick = (id) => {
         console.log("handleclick:", id)
@@ -15,9 +15,9 @@ export default function Main(props) {
     }
 
     const handlePortfolioClick = () => {
-
+        console.log("investmentByCurrency", investmentByCurrency)
+        props.history.push('/portfolio', investmentByCurrency)
     }
-
     return (
         <div >
             <Grid container >
@@ -45,17 +45,4 @@ export default function Main(props) {
     )
 }
 
-// const BuyCryptoModal = ({ show, cryptoModalData }) => {
-
-//     return (
-//         <div className = {}>
-//             <section className="modal-main">
-//                 <Header
-//                     name="Simple Buy"
-//                 />
-
-//             </section>
-//         </div>
-//     )
-
-// }
+export default withRouter(Main)

@@ -1,12 +1,10 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography';
-import { AppBar, Toolbar, IconButton } from "@material-ui/core"
-import CryptoList from "../Table/CryptoList";
+import { AppBar, Toolbar } from "@material-ui/core"
 import { Button, TextField } from '@material-ui/core';
 
 
 const BuyCryptoModal = ({ onClose, onBuy, show, cryptoModalData }) => {
-
     const style = {
         textField: {
             marginLeft: 10,
@@ -53,17 +51,26 @@ const BuyCryptoModal = ({ onClose, onBuy, show, cryptoModalData }) => {
         var cryptoPrice = price * 75
     }
 
+    const handleClose = () => {
+        setValues({
+            coins: ''
+        })
+        onClose()
+    }
 
-    const handleBuyClick = () => {
-        let coins = values.coins
+    const handleBuy = () => {
+        setValues({
+            coins: ''
+        })
+        let coins = parseInt(values.coins)
         let total = values.coins * cryptoPrice
         onBuy({
-            "name": cryptoModalData[0].name,
-            "no_coins": coins,
-            "total_price": total
+            name: cryptoModalData[0].name,
+            coins: coins,
+            total: total
         })
-        // console.log("bought data:", [cryptoModalData[0].name, coins, total])
     }
+
     return (
         <div className={showHideClassName}>
             <section className="modal-main">
@@ -113,14 +120,14 @@ const BuyCryptoModal = ({ onClose, onBuy, show, cryptoModalData }) => {
                         variant="outlined"
                         color="secondary"
                         style={style.button1}
-                        onClick={onClose}>
+                        onClick={handleClose}>
                         CANCLE
                     </Button>
                     <Button
                         variant="contained"
                         color="secondary"
                         style={style.button2}
-                        onClick={handleBuyClick}>
+                        onClick={handleBuy}>
                         BUY
                     </Button>
                 </div>

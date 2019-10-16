@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Axios from 'axios'
 import './App.css';
 import Header from './Components/Layout/Header'
-import Footer from './Components/Layout/Footer'
 import Main from './Components/Layout/Main'
 import BuyCryptoModal from './Components/Modal/BuyCrypto'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class App extends Component {
   constructor(props) {
@@ -13,11 +13,32 @@ export default class App extends Component {
       cryptoData: [],
       modalData: [],
       cryptoBoughtData: [],
-      modalShow: false
+      userInverstment: [],
+      modalShow: false,
+      isLoading: true,
+    }
+  }
+
+  saveState = () => {
+    const { cryptoBoughtData } = this.state
+    try {
+      localStorage.setItem('cryptoBoughtData', JSON.stringify(cryptoBoughtData))
+    } catch (e) {
+      console.log(`save failed`)
+    }
+  }
+
+  loadState = () => {
+    try {
+      const cryptoBoughtData = JSON.parse(localStorage.getItem('cryptoBoughtData'))
+      this.setState({ cryptoBoughtData })
+    } catch (e) {
+      console.log(`couldn't load data`)
     }
   }
 
   componentDidMount() {
+    this.loadState()
     this.getData()
   }
 
@@ -32,7 +53,8 @@ export default class App extends Component {
       .get(API_URL, config)
       .then(({ data: { data } }) => {
         this.setState({
-          cryptoData: data
+          cryptoData: data,
+          isLoading: false
         })
       }).catch(error => {
         console.log(error)
@@ -40,17 +62,13 @@ export default class App extends Component {
   }
 
   CryptoModalInfo = (id) => {
-    // get the cryptoModaldata from cryptodata using Id
     const modalData = this.state.cryptoData.filter((data) => {
       return data.id === id
     })
-    console.log("modal data", [...modalData], this.state.cryptoModalData)
-
     this.setState({
       modalShow: true,
       modalData
     })
-    // console.log("app.js", modalData)
   }
 
   CloseModal = () => {
@@ -60,18 +78,40 @@ export default class App extends Component {
   }
 
   handleBuy = (BoughtData) => {
-    console.log("BoughtData", BoughtData)
     this.setState((state) => {
       return {
         modalShow: false,
-        cryptoBoughtData: (BoughtData)
+        cryptoBoughtData: [...state.cryptoBoughtData, BoughtData]
       }
-    })
+    }, this.saveState)
+  }
+
+  getBoughtstocksByCurrency = () => {
+    const { cryptoBoughtData } = this.state
+    const dataByCurrency = cryptoBoughtData.reduce((acc, obj) => {
+      const { name } = obj
+      if (!acc[name]) {
+        acc[name] = { total: 0, coins: 0 }
+      }
+      acc[name].total += obj.total
+      acc[name].coins += obj.coins
+      return acc
+    }, {})
+
+    var result = []
+    for (let i in dataByCurrency) {
+      result = [...result, {
+        name: i,
+        total: dataByCurrency[i].total,
+        coins: dataByCurrency[i].coins
+      }]
+    }
+    return result
   }
 
   render() {
-    const { cryptoData, modalData, modalShow, cryptoBoughtData } = this.state
-    console.log("App.js, cryptoBoughtData:", cryptoBoughtData)
+    const { cryptoData, modalData, modalShow, isLoading } = this.state
+    const investmentByCurrency = this.getBoughtstocksByCurrency()
     return (
       <div >
         <Header />
@@ -81,13 +121,16 @@ export default class App extends Component {
           onClose={this.CloseModal}
           onBuy={this.handleBuy}
         />
-        <Main
-          cryptodata={cryptoData}
-          handleCryptoBuy={this.CryptoModalInfo}
-          cryptoBoughtData={cryptoBoughtData}
-        // show={modalShow}
-        />
-        <Footer />
+        {isLoading ?
+          <div style={{ position: "absolute", left: "50%", top: "50%" }}>
+            <CircularProgress color="secondary" />
+          </div> :
+          <Main
+            cryptodata={cryptoData}
+            handleCryptoBuy={this.CryptoModalInfo}
+            investmentByCurrency={investmentByCurrency}
+          />
+        }
       </div>
     )
   }

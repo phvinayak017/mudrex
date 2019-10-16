@@ -1,10 +1,7 @@
-import React, { Fragment } from 'react'
-import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core"
-import MenuIcon from '@material-ui/icons/Menu'
+import React from 'react'
+import { AppBar, Toolbar, Typography } from "@material-ui/core"
 
-
-function Header(props) {
-    const { name } = props
+const Header = () => {
     return (
         <div>
             <AppBar position="static">
