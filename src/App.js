@@ -31,7 +31,9 @@ export default class App extends Component {
   loadState = () => {
     try {
       const cryptoBoughtData = JSON.parse(localStorage.getItem('cryptoBoughtData'))
-      this.setState({ cryptoBoughtData })
+      if (cryptoBoughtData) {
+        this.setState({ cryptoBoughtData })
+      }
     } catch (e) {
       console.log(`couldn't load data`)
     }

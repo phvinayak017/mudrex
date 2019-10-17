@@ -14,8 +14,8 @@ const Main = (props) => {
         handleCryptoBuy(id)
     }
 
+
     const handlePortfolioClick = () => {
-        console.log("investmentByCurrency", investmentByCurrency)
         props.history.push('/portfolio', investmentByCurrency)
     }
     return (

@@ -45,8 +45,6 @@ const ProfileCard = (props) => {
                         <Typography style={style.currency} color="Primary" gutterBottom>
                             {stock.name}
                         </Typography>
-                        {/* <Divider variant="fullwidth" /> */}
-
                     </Grid>
                     <Grid item xs={6}>
                         <Typography style={style.heading} color="textSecondary"   >
@@ -61,7 +59,6 @@ const ProfileCard = (props) => {
                         <Typography style={style.heading} color="textSecondary" >
                             Investment
                             </Typography>
-                        {/* <Divider variant="middle" /> */}
                         <Typography style={style.value} color="textSecondary" >
                             {(stock.total).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </Typography>

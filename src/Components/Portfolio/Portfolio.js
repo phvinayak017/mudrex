@@ -32,7 +32,6 @@ const Portfolio = (props) => {
     let totalInvestment = investment.reduce((acc, stock) => {
         return acc + stock.total
     }, 0)
-    console.log("Invest:", totalInvestment)
     return (
         <Fragment>
             <Header />
@@ -47,8 +46,8 @@ const Portfolio = (props) => {
                 <Grid item xs={12}>
                     <Paper style={style.body}>
                         <Grid container>
-                            {investment.map(stock => (
-                                <Grid item xs={6} sm={3}>
+                            {investment.map((stock, id) => (
+                                <Grid item xs={6} sm={3} key={id}>
                                     <ProfileCard
                                         style={style.card}
                                         stock={stock}
