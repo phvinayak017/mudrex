@@ -83,13 +83,13 @@ export default class CryptoList extends Component {
                                         align="left"
                                         style={style.cell}
                                     >
-                                        {cryptoPrice}
+                                        {cryptoPrice.toLocaleString(undefined, { maximumFractionDigits: 3 })}
                                     </TableCell>
                                     <TableCell
                                         align="left"
                                         style={style.cell}
                                     >
-                                        {content.circulating_supply}
+                                        {(content.circulating_supply).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                                     </TableCell>
                                 </TableRow>
                             )
