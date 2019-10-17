@@ -42,7 +42,7 @@ export default class CryptoList extends Component {
                 <Table stickyHeader>
                     <TableHead>
                         <TableRow>
-                            {columns.map((column, id) => {
+                            {columns.map((column) => {
                                 return (<TableCell
                                     key={column.id}
                                     align={column.align}

@@ -88,6 +88,7 @@ export default class App extends Component {
     }, this.saveState)
   }
 
+  // aggregate the data as user buys stocks
   getBoughtstocksByCurrency = () => {
     const { cryptoBoughtData } = this.state
     const dataByCurrency = cryptoBoughtData.reduce((acc, obj) => {

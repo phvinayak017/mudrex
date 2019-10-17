@@ -3,38 +3,38 @@ import Typography from '@material-ui/core/Typography';
 import { AppBar, Toolbar } from "@material-ui/core"
 import { Button, TextField } from '@material-ui/core';
 
+const style = {
+    textField: {
+        marginLeft: 10,
+        marginRight: 50,
+        marginBottom: 50,
+        width: 200,
+    },
+    heading: {
+        marginLeft: 20,
+        marginTop: 20,
+    },
+    button1: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 30,
+        paddingLeft: 30,
+        paddingRight: 30,
+    },
+    button2: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 30,
+        paddingLeft: 45,
+        paddingRight: 45,
+    },
+    totalprice: {
+        marginLeft: 180,
+        fontWeight: 100
+    }
+}
 
 const BuyCryptoModal = ({ onClose, onBuy, show, cryptoModalData }) => {
-    const style = {
-        textField: {
-            marginLeft: 10,
-            marginRight: 50,
-            marginBottom: 50,
-            width: 200,
-        },
-        heading: {
-            marginLeft: 20,
-            marginTop: 20,
-        },
-        button1: {
-            marginLeft: 10,
-            marginRight: 10,
-            marginBottom: 30,
-            paddingLeft: 30,
-            paddingRight: 30,
-        },
-        button2: {
-            marginLeft: 10,
-            marginRight: 10,
-            marginBottom: 30,
-            paddingLeft: 45,
-            paddingRight: 45,
-        },
-        totalprice: {
-            marginLeft: 180,
-            fontWeight: 100
-        }
-    }
 
     const [values, setValues] = React.useState({
         coins: '',
@@ -134,7 +134,6 @@ const BuyCryptoModal = ({ onClose, onBuy, show, cryptoModalData }) => {
             </section>
         </div >
     )
-
 }
 
 export default BuyCryptoModal

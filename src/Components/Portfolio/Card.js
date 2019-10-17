@@ -50,7 +50,6 @@ const ProfileCard = (props) => {
                         <Typography style={style.heading} color="textSecondary"   >
                             Coins
                             </Typography>
-                        {/* <Divider variant="middle" /> */}
                         <Typography style={style.value} color="textSecondary" >
                             {(stock.coins).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </Typography>
