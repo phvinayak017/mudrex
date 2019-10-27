@@ -8,13 +8,23 @@ import Header from '../Layout/Header'
 
 const style = {
     head: {
-        height: "18vh"
+        height: "auto",
+        marginBottom: "1vh"
     },
-    total: {
-        marginLeft: "105vh",
-        paddingTop: "6vh",
-        fontSize: 48,
+    heading: {
+        marginLeft: "40px",
+        paddingTop: "40px",
+        fontSize: "1.7rem",
         fontWeight: 300
+
+    },
+    value: {
+        marginLeft: "40px",
+        marginBottom: "30px",
+        paddingTop: "4px",
+        fontSize: 18,
+        fontWeight: 300,
+        color: "#717171"
 
     },
     body: {
@@ -24,30 +34,78 @@ const style = {
     },
     card: {
         paddingTop: 10,
-
+        // marginLeft: 10,
+        // marginLeft: 30,
+        // marginTop: 30,
     }
 }
 const Portfolio = (props) => {
-    const { state: investment } = props.location
-    let totalInvestment = investment.reduce((acc, stock) => {
+    const { cryptodata, investments } = props.location.state
+    console.log("portfolio investments data: ", cryptodata, investments)
+
+    const investmentsWithCurrentPrice = investments.map(investment => {
+        const { name } = investment
+        cryptodata.map(stock => {
+            if (name === stock.name) {
+                let { quote: { USD: { price } } } = stock
+                investment["current_price"] = price * 75
+            }
+        })
+        return investment
+    }).filter((item) => {
+        return item.coins > 0
+    })
+
+    let currentInvestment = investmentsWithCurrentPrice.reduce((acc, stock) => {
+        let total = stock.coins * stock.current_price
+        return acc + total
+    }, 0)
+
+    let totalInvested = investments.reduce((acc, stock) => {
         return acc + stock.total
     }, 0)
+
+    let profit_loss = currentInvestment - totalInvested
+
     return (
         <Fragment>
             <Header />
             <Grid container >
                 <Grid item xs={12} >
                     <Paper style={style.head}>
-                        <Typography color="primary" style={style.total}>
-                            Total Investment : {totalInvestment.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                        </Typography>
+                        <Grid container>
+                            <Grid item xs={12} sm={4} md={4}>
+                                <Typography color="secondary" style={style.heading} align="left">
+                                    INVESTED
+                                </Typography>
+                                <Typography color="primary" style={style.value} align="left">
+                                    &#8377; {totalInvested.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={4} md={4}>
+                                <Typography color="secondary" style={style.heading} align="left">
+                                    CURRENT
+                                </Typography>
+                                <Typography color="primary" style={style.value} align="left">
+                                    &#8377; {currentInvestment.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={4} md={4}>
+                                <Typography color="secondary" style={style.heading} align="left">
+                                    PROFIT/LOSS
+                                </Typography>
+                                <Typography style={style.value} align="left">
+                                    &#8377; {profit_loss.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
                     <Paper style={style.body}>
                         <Grid container>
-                            {investment.map((stock, id) => (
-                                <Grid item xs={6} sm={3} key={id}>
+                            {investmentsWithCurrentPrice.map((stock, id) => (
+                                <Grid item xs={12} sm={6} md={3} key={id}>
                                     <ProfileCard
                                         style={style.card}
                                         stock={stock}

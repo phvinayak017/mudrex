@@ -5,37 +5,57 @@ import CryptoList from "../Table/CryptoList";
 import { Button } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 
+const style = {
+    profilebutton: {
+        margin: "5.5vh 10vw"
+    }
+}
 
 const Main = (props) => {
-    const { cryptodata, handleCryptoBuy, investmentByCurrency } = props
+    const { cryptodata, handleCryptoBuy, handleCryptoSell, investmentByCurrency } = props
 
-    const handleClick = (id) => {
-        console.log("handleclick:", id)
-        handleCryptoBuy(id)
+    const handleBuyClick = (buttonClickInfo) => {
+        // console.log("handleclick - BUY:", buttonClickInfo)
+        handleCryptoBuy(buttonClickInfo)
+    }
+    const handleSellClick = (buttonClickInfo) => {
+        // console.log("handleclick - SELL:", buttonClickInfo)
+        handleCryptoSell(buttonClickInfo)
     }
 
     const handlePortfolioClick = () => {
-        props.history.push('/portfolio', investmentByCurrency)
+        props.history.push('/portfolio', { investments: investmentByCurrency, cryptodata })
     }
     return (
         <div >
             <Grid container >
                 <Grid item xs={12} >
-                    <Paper style={{ height: "15vh" }}>
-                        <Button
-                            variant="contained"
-                            color='secondary'
-                            style={{ marginLeft: "185vh", marginTop: "6vh" }}
-                            onClick={handlePortfolioClick}>
-                            Portfolio
+                    <Paper style={{ height: "14vh" }}>
+                        <Grid
+                            container
+                            direction="row"
+                            justify="flex-end"
+                            alignItems='center'
+
+                        >
+                            <Button
+                                variant="contained"
+                                color='secondary'
+                                style={style.profilebutton}
+                                onClick={handlePortfolioClick}
+                            >
+                                Portfolio
                             </Button>
+                        </Grid>
                     </Paper>
                 </Grid>
+
                 <Grid item xs={12}>
                     <Paper style={{ height: "75vh", marginTop: "10px", overflowY: "auto" }}>
                         <CryptoList
                             tablecontent={cryptodata}
-                            onCryptoCurrencyClick={handleClick}
+                            onBuyCoinsClick={handleBuyClick}
+                            onSellCoinsClick={handleSellClick}
                         />
                     </Paper>
                 </Grid>

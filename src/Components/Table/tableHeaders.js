@@ -8,7 +8,8 @@ const columns = [
         label: 'Rank',
         minWidth: WIDTH,
         align: ALIGNMENT,
-        paddingLeft: PADDING_LEFT
+        paddingLeft: PADDING_LEFT,
+        margin: 0,
         // format: value => value.toLocaleString(),
     },
     {
@@ -16,21 +17,24 @@ const columns = [
         label: 'Name',
         minWidth: WIDTH,
         align: ALIGNMENT,
-        paddingLeft: PADDING_LEFT
+        paddingLeft: PADDING_LEFT,
+        margin: 0,
     },
     {
         id: 'symbol',
         label: 'Symbol',
         minWidth: 10,
         align: ALIGNMENT,
-        paddingLeft: PADDING_LEFT
+        paddingLeft: PADDING_LEFT,
+        margin: 0,
     },
     {
         id: 'price',
         label: 'Price(INR)',
         minWidth: WIDTH,
         align: ALIGNMENT,
-        paddingLeft: PADDING_LEFT
+        paddingLeft: PADDING_LEFT,
+        margin: 0,
         // format: value => value.toLocaleString(),
     },
     {
@@ -38,7 +42,17 @@ const columns = [
         label: 'Circulating Supply',
         minWidth: WIDTH,
         align: ALIGNMENT,
-        paddingLeft: PADDING_LEFT
+        paddingLeft: PADDING_LEFT,
+        margin: 10,
+        // format: value => value.toLocaleString(),
+    },
+    {
+        id: 'buy_sell',
+        label: 'Buy/Sell',
+        minWidth: 1,
+        align: ALIGNMENT,
+        paddingLeft: 65,
+        margin: "0 0 0 10px",
         // format: value => value.toLocaleString(),
     },
 ];

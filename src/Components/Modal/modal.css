@@ -1,0 +1,65 @@
+.textField {
+  margin-left: 20;
+  margin-right: 50;
+  margin-bottom: 50;
+  width: 200;
+}
+
+.header {
+  padding-top: 20;
+  padding-bottom: 20;
+}
+
+.button1 {
+  margin-left: 10;
+  margin-right: 10;
+  margin-bottom: 30;
+  padding-left: 30;
+  padding-right: 30;
+}
+
+.button2 {
+  margin-left: 10;
+  margin-right: 10;
+  margin-bottom: 30;
+  padding-left: 45;
+  padding-right: 45;
+}
+
+.totalprice {
+  /* margin-left: 180; */
+  font-weight: 100;
+  padding-Top: 20;
+  padding-Bottom: 20;
+  left: 90;
+}
+
+.name {
+  margin-left: 20;
+  margin-top: 20;
+  font-size: 38;
+  font-weight: 300
+}
+
+.heading {
+  margin-top: 10;
+  margin-left: 13;
+  font-size: 17;
+  font-weight: 400
+}
+
+.value {
+  font-size: 14;
+  font-weight: 300;
+  margin-left: 20;
+  margin-top: 5;
+  margin-bottom: 10;
+}
+
+.notify {
+  margin-left: 20;
+  margin-bottom: 20;
+  font-size: 18;
+  font-style: "italic";
+  font-weight: 400
+}
