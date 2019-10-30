@@ -135,7 +135,7 @@ export default class App extends Component {
   // aggregate the data as user buys stocks
 
   aggregateData = (stockData, isAddData) => {
-    console.log("stock data", stockData)
+    // console.log("stock data", stockData)
     const dataByCurrency = stockData.reduce((acc, obj) => {
       const { name } = obj
       if (!acc[name]) {
@@ -145,7 +145,7 @@ export default class App extends Component {
         acc[name].total += obj.total
         acc[name].coins += obj.coins
       } else {
-        acc[name].total = obj.total - acc[name].total
+        acc[name].total = Math.abs(acc[name].total - obj.total)
         acc[name].coins = Math.abs(acc[name].coins - obj.coins)
       }
       return acc
@@ -167,6 +167,7 @@ export default class App extends Component {
     const boughtData = this.aggregateData(cryptoBoughtData, true)
     const soldData = this.aggregateData(cryptoSoldData, true)
     const boughtAndSoldData = [...boughtData, ...soldData]
+    console.log("merged data", boughtAndSoldData)
     const portfolioData = this.aggregateData(boughtAndSoldData, false)
     console.log("sold and bought data:", boughtData, soldData, portfolioData)
 
