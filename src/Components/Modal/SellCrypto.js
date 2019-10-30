@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import { AppBar, Toolbar } from "@material-ui/core"
 import { Button, TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { withRouter } from 'react-router-dom';
 
 const style = {
   textField: {
@@ -18,14 +17,14 @@ const style = {
   },
   button1: {
     marginLeft: 10,
-    marginRight: 10,
+    // marginRight: 10,
     marginBottom: 30,
     paddingLeft: 30,
     paddingRight: 30,
   },
   button2: {
     marginLeft: 10,
-    marginRight: 10,
+    // marginRight: 10,
     marginBottom: 30,
     paddingLeft: 45,
     paddingRight: 45,
