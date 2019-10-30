@@ -93,7 +93,6 @@ export default class App extends Component {
   }
 
   CloseModal = (buttonInfo) => {
-
     if (buttonInfo.button === "buy") {
       this.setState({
         buyModalShow: false
@@ -133,7 +132,6 @@ export default class App extends Component {
 
 
   // aggregate the data as user buys stocks
-
   aggregateData = (stockData, isAddData) => {
     // console.log("stock data", stockData)
     const dataByCurrency = stockData.reduce((acc, obj) => {
@@ -162,6 +160,7 @@ export default class App extends Component {
     }
     return result
   }
+
   getBoughtstocksByCurrency = () => {
     const { cryptoBoughtData, cryptoSoldData } = this.state
     const boughtData = this.aggregateData(cryptoBoughtData, true)
@@ -170,7 +169,6 @@ export default class App extends Component {
     console.log("merged data", boughtAndSoldData)
     const portfolioData = this.aggregateData(boughtAndSoldData, false)
     console.log("sold and bought data:", boughtData, soldData, portfolioData)
-
     return portfolioData
   }
 
