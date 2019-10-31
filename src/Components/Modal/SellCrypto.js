@@ -63,8 +63,8 @@ const SellCryptoModal = (props) => {
   // console.log("bought data -seel: ", boughtData)
   //#region 
   const [values, setValues] = React.useState({
-    coins: '',
-    total: '',
+    coins: 0,
+    total: 0,
     isholding: true
   });
 

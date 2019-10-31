@@ -53,8 +53,8 @@ const BuyCryptoModal = (props) => {
     const { onClose, onBuy, show, cryptoModalData } = props
     // console.log("cryptmodalData:", cryptoModalData)
     const [values, setValues] = React.useState({
-        coins: '',
-        total: ''
+        coins: 0,
+        total: 0
     });
 
     const handleChange = name => event => {
